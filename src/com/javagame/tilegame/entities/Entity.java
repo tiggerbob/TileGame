@@ -31,6 +31,8 @@ public abstract class Entity {
 
     public abstract void die();
 
+    public abstract boolean isCreature();
+
     public void hurt(int amt) {
         health -= amt;
         if (health <= 0) {

@@ -32,4 +32,8 @@ public class Rock extends StaticEntity{
     public void render(Graphics g) {
         g.drawImage(Assets.rock, (int) (x - handler.getGameCamera().getxOffset()), (int) (y - handler.getGameCamera().getyOffset()), Tile.TILEWIDTH, Tile.TILEHEIGHT, null);
     }
+
+    public boolean isCreature() {
+        return false;
+    }
 }

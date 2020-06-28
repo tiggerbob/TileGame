@@ -28,11 +28,11 @@ public class World {
         entityManager = new EntityManager(handler, new Player(handler, 100, 100));
         itemManager = new ItemManager(handler);
         //Temporary entity code! ---------------------------------
-        entityManager.addEntity(new Tree(handler, 132, 250));
+        entityManager.addEntity(new Tree(handler, 132, 350));
         entityManager.addEntity(new Rock(handler, 132, 450));
         entityManager.addEntity(new Rock(handler, 350, 300));
-        entityManager.addEntity(new Rock(handler, 400, 345));
-        entityManager.addEntity(new Tree(handler, 625, 325));
+        entityManager.addEntity(new Rock(handler, 450, 450));
+        entityManager.addEntity(new Tree(handler, 625, 605));
         entityManager.addEntity(new Tree(handler, 100, 650));
         entityManager.addEntity(new Rock(handler, 100, 850));
 
@@ -40,10 +40,10 @@ public class World {
 
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
-        entityManager.addEntity(new Zombie(handler, 100, 150));
         entityManager.addEntity(new Zombie(handler, 200, 350));
         entityManager.addEntity(new Zombie(handler, 400, 450));
         entityManager.addEntity(new Zombie(handler, 400, 750));
+        entityManager.addEntity(new Zombie(handler, 700, 850));
     }
 
     public void tick(){

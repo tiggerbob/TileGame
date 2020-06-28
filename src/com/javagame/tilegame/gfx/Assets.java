@@ -9,9 +9,11 @@ public class Assets {
 
     public static Font font28;
 
-    public static BufferedImage dirt, grass, stone, tree, rock, wood;
+    public static BufferedImage dirt, grass, stone, exit, tree, rock, wood;
     public static BufferedImage[] player_down, player_up, player_left, player_right;
     public static BufferedImage[] zombie_down, zombie_up, zombie_left, zombie_right;
+    public static BufferedImage[] player_down_atk, player_up_atk, player_left_atk, player_right_atk;
+    public static BufferedImage[] zombie_down_atk, zombie_up_atk, zombie_left_atk, zombie_right_atk;
     public static BufferedImage[] btn_start;
     public static BufferedImage inventoryScreen;
 
@@ -54,10 +56,39 @@ public class Assets {
         zombie_left[0] = sheet.crop(width * 6, height * 3, width, height);
         zombie_left[1] = sheet.crop(width * 7, height * 3, width, height);
 
+        player_down_atk = new BufferedImage[2];
+        player_up_atk = new BufferedImage[2];
+        player_left_atk = new BufferedImage[2];
+        player_right_atk = new BufferedImage[2];
+
+        player_down_atk[0] = sheet.crop(0, height * 4, width, height);
+        player_down_atk[1] = sheet.crop(width, height * 4, width, height);
+        player_up_atk[0] = sheet.crop(width * 2, height * 4, width, height);
+        player_up_atk[1] = sheet.crop(width * 3, height * 4, width, height);
+        player_right_atk[0] = sheet.crop(0, height * 5, width, height);
+        player_right_atk[1] = sheet.crop(width, height * 5, width, height);
+        player_left_atk[0] = sheet.crop(width * 2, height * 5, width, height);
+        player_left_atk[1] = sheet.crop(width * 3, height * 5, width, height);
+
+        zombie_down_atk = new BufferedImage[2];
+        zombie_up_atk = new BufferedImage[2];
+        zombie_left_atk = new BufferedImage[2];
+        zombie_right_atk = new BufferedImage[2];
+
+        zombie_down_atk[0] = sheet.crop(0, height * 6, width, height);
+        zombie_down_atk[1] = sheet.crop(width, height * 6, width, height);
+        zombie_up_atk[0] = sheet.crop(width * 2, height * 6, width, height);
+        zombie_up_atk[1] = sheet.crop(width * 3, height * 6, width, height);
+        zombie_right_atk[0] = sheet.crop(0, height * 7, width, height);
+        zombie_right_atk[1] = sheet.crop(width, height * 7, width, height);
+        zombie_left_atk[0] = sheet.crop(width * 2, height * 7, width, height);
+        zombie_left_atk[1] = sheet.crop(width * 3, height * 7, width, height);
+
         tree = sheet.crop(0, 0, width, height * 2);
         dirt = sheet.crop(width, 0, width, height);
         grass = sheet.crop(width * 2, 0, width, height);
         stone = sheet.crop(width * 3, 0, width, height);
+        exit = sheet.crop(width * 2, height, width, height);
         rock = sheet.crop(0, height * 2, width, height);
         wood = sheet.crop(width, height, width, height);
     }

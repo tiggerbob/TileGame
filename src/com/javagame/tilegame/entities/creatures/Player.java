@@ -5,14 +5,23 @@ import com.javagame.tilegame.entities.Entity;
 import com.javagame.tilegame.gfx.Animation;
 import com.javagame.tilegame.gfx.Assets;
 import com.javagame.tilegame.inventory.Inventory;
+import com.javagame.tilegame.states.GameState;
+import com.javagame.tilegame.states.State;
+import com.javagame.tilegame.tiles.Tile;
+import com.javagame.tilegame.worlds.World;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageFilter;
 
 public class Player extends Creature {
 
     //Animations
     private Animation animDown, animUp, animLeft, animRight;
+    private Animation animDownMad, animUpMad, animLeftMad, animRightMad;
+    private boolean hasWeapon = false;
+    private boolean weaponActive = false;
     //Attack timer
     private long lastAttackTimer, attackCooldown = 100, attackTimer = attackCooldown;
     //Inventory
@@ -32,6 +41,11 @@ public class Player extends Creature {
         animLeft = new Animation(250, Assets.player_left);
         animRight = new Animation(250, Assets.player_right);
 
+        animDownMad = new Animation(250, Assets.player_down_atk);
+        animUpMad = new Animation(250, Assets.player_up_atk);
+        animLeftMad = new Animation(250, Assets.player_left_atk);
+        animRightMad = new Animation(250, Assets.player_right_atk);
+
         inventory = new Inventory(handler);
     }
 
@@ -42,6 +56,11 @@ public class Player extends Creature {
         animUp.tick();
         animLeft.tick();
         animRight.tick();
+
+        animDownMad.tick();
+        animUpMad.tick();
+        animLeftMad.tick();
+        animRightMad.tick();
         //Movement
         getInput();
         move();
@@ -50,6 +69,10 @@ public class Player extends Creature {
         checkAttacks();
         //Inventory
         inventory.tick();
+        checkWeapon();
+
+        if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SHIFT))
+            weaponActive = !weaponActive;
     }
 
     private void checkAttacks(){
@@ -89,6 +112,8 @@ public class Player extends Creature {
             if (e.equals(this))
                 continue;
             if (e.getCollisionBounds(0, 0).intersects(ar)) {
+                if ((!e.isCreature() && weaponActive) || (!weaponActive && e.isCreature()))
+                    return;
                 e.hurt(1);
                 return;
             }
@@ -97,7 +122,7 @@ public class Player extends Creature {
 
     @Override
     public void die() {
-        System.out.println("You lose :(");
+//        System.out.println("You lose :(");
     }
 
     private void getInput(){
@@ -127,18 +152,56 @@ public class Player extends Creature {
     }
 
     private BufferedImage getCurrentAnimationFrame() {
-        if (xMove < 0) {
-            return animLeft.getCurrentFrame();
-        } else if (xMove > 0) {
-            return animRight.getCurrentFrame();
-        } else if (yMove < 0) {
-            return animUp.getCurrentFrame();
+        if (hasWeapon && weaponActive){
+            if (xMove < 0) {
+                return animLeftMad.getCurrentFrame();
+            } else if (xMove > 0) {
+                return animRightMad.getCurrentFrame();
+            } else if (yMove < 0) {
+                return animUpMad.getCurrentFrame();
+            } else {
+                return animDownMad.getCurrentFrame();
+            }
         } else {
-            return animDown.getCurrentFrame();
+            if (xMove < 0) {
+                return animLeft.getCurrentFrame();
+            } else if (xMove > 0) {
+                return animRight.getCurrentFrame();
+            } else if (yMove < 0) {
+                return animUp.getCurrentFrame();
+            } else {
+                return animDown.getCurrentFrame();
+            }
         }
     }
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    private void checkWeapon() {
+        if (inventory.getInventoryItems().size() != 0) {
+            if (inventory.getInventoryItems().get(inventory.getSelectedItem()).getName().equalsIgnoreCase("Wood")) {
+                hasWeapon = true;
+            }
+        }
+    }
+
+    public boolean isWeaponActive() {
+        return weaponActive;
+    }
+
+    public void setWeaponActive(boolean weaponActive) {
+        this.weaponActive = weaponActive;
+    }
+
+    public boolean isCreature() {
+        return false;
+    }
+
+    public void moveNextWorld() {
+        if (true) {
+            handler.setWorld(GameState.world2);
+        }
     }
 }
