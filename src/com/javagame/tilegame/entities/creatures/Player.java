@@ -4,6 +4,7 @@ import com.javagame.tilegame.Handler;
 import com.javagame.tilegame.entities.Entity;
 import com.javagame.tilegame.gfx.Animation;
 import com.javagame.tilegame.gfx.Assets;
+import com.javagame.tilegame.input.KeyManager;
 import com.javagame.tilegame.inventory.Inventory;
 import com.javagame.tilegame.states.GameState;
 import com.javagame.tilegame.states.State;
@@ -73,6 +74,8 @@ public class Player extends Creature {
 
         if (handler.getKeyManager().keyJustPressed(KeyEvent.VK_SHIFT))
             weaponActive = !weaponActive;
+
+        moveNextWorld();
     }
 
     private void checkAttacks(){
@@ -200,8 +203,9 @@ public class Player extends Creature {
     }
 
     public void moveNextWorld() {
-        if (true) {
-            handler.setWorld(GameState.world2);
+        if (getCollisionBounds(0f, 0f).intersects(18 * Tile.TILEWIDTH, 18 * Tile.TILEHEIGHT, Tile.TILEWIDTH, Tile.TILEHEIGHT)) {
+            if (handler.getWorld() == GameState.world1)
+                handler.setWorld(GameState.world2);
         }
     }
 }

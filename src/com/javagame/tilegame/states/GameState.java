@@ -17,19 +17,29 @@ public class GameState extends State{
 
     @Override
     public void tick() {
-        world1.tick();
+        if (handler.getWorld() == world1)
+            world1.tick();
+        else if (handler.getWorld() == world2)
+            world2.tick();
+        else
+            System.out.println("world not found (tick)");
     }
 
     @Override
     public void render(Graphics g) {
-        world1.render(g);
+        if (handler.getWorld() == world1)
+            world1.render(g);
+        else if (handler.getWorld() == world2)
+            world2.render(g);
+        else
+            System.out.println("world not found (render)");
     }
 
-//    public static World getWorld1() {
-//        return world1;
-//    }
-//
-//    public static World getWorld2() {
-//        return world2;
-//    }
+    public static World getWorld1() {
+        return world1;
+    }
+
+    public static World getWorld2() {
+        return world2;
+    }
 }

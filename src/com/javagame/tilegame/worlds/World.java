@@ -7,6 +7,7 @@ import com.javagame.tilegame.entities.creatures.Zombie;
 import com.javagame.tilegame.entities.statics.Rock;
 import com.javagame.tilegame.entities.statics.Tree;
 import com.javagame.tilegame.items.ItemManager;
+import com.javagame.tilegame.states.GameState;
 import com.javagame.tilegame.tiles.Tile;
 import com.javagame.tilegame.utils.Utils;
 
@@ -28,6 +29,7 @@ public class World {
         entityManager = new EntityManager(handler, new Player(handler, 100, 100));
         itemManager = new ItemManager(handler);
         //Temporary entity code! ---------------------------------
+
         entityManager.addEntity(new Tree(handler, 132, 350));
         entityManager.addEntity(new Rock(handler, 132, 450));
         entityManager.addEntity(new Rock(handler, 350, 300));
@@ -35,15 +37,15 @@ public class World {
         entityManager.addEntity(new Tree(handler, 625, 605));
         entityManager.addEntity(new Tree(handler, 100, 650));
         entityManager.addEntity(new Rock(handler, 100, 850));
+        entityManager.addEntity(new Zombie(handler, 200, 350));
+        entityManager.addEntity(new Zombie(handler, 400, 450));
+        entityManager.addEntity(new Zombie(handler, 400, 750));
+        entityManager.addEntity(new Zombie(handler, 700, 850));
 
         loadWorld(path);
 
         entityManager.getPlayer().setX(spawnX);
         entityManager.getPlayer().setY(spawnY);
-        entityManager.addEntity(new Zombie(handler, 200, 350));
-        entityManager.addEntity(new Zombie(handler, 400, 450));
-        entityManager.addEntity(new Zombie(handler, 400, 750));
-        entityManager.addEntity(new Zombie(handler, 700, 850));
     }
 
     public void tick(){

@@ -3,6 +3,8 @@ package com.javagame.tilegame;
 import com.javagame.tilegame.gfx.GameCamera;
 import com.javagame.tilegame.input.KeyManager;
 import com.javagame.tilegame.input.MouseManager;
+import com.javagame.tilegame.states.GameState;
+import com.javagame.tilegame.states.State;
 import com.javagame.tilegame.worlds.World;
 
 public class Handler {
