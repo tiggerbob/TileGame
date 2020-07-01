@@ -204,8 +204,13 @@ public class Player extends Creature {
 
     public void moveNextWorld() {
         if (getCollisionBounds(0f, 0f).intersects(18 * Tile.TILEWIDTH, 18 * Tile.TILEHEIGHT, Tile.TILEWIDTH, Tile.TILEHEIGHT)) {
-            if (handler.getWorld() == GameState.world1)
+            if (handler.getWorld() == GameState.world1) {
                 handler.setWorld(GameState.world2);
+            } else if (handler.getWorld() == GameState.world2) {
+                handler.setWorld(GameState.world3);
+            } else {
+                handler.setWorld(GameState.world1);
+            }
         }
     }
 }

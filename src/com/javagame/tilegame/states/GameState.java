@@ -6,12 +6,13 @@ import java.awt.*;
 
 public class GameState extends State{
 
-    public static World world1, world2;
+    public static World world1, world2, world3;
 
     public GameState(Handler handler) {
         super(handler);
         world1 = new World(handler, "res/worlds/world1.txt");
         world2 = new World(handler, "res/worlds/world2.txt");
+        world3 = new World(handler, "res/worlds/world3.txt");
         handler.setWorld(world1);
     }
 
@@ -21,6 +22,8 @@ public class GameState extends State{
             world1.tick();
         else if (handler.getWorld() == world2)
             world2.tick();
+        else if (handler.getWorld() == world3)
+            world3.tick();
         else
             System.out.println("world not found (tick)");
     }
@@ -31,15 +34,9 @@ public class GameState extends State{
             world1.render(g);
         else if (handler.getWorld() == world2)
             world2.render(g);
+        else if (handler.getWorld() == world3)
+            world3.render(g);
         else
             System.out.println("world not found (render)");
-    }
-
-    public static World getWorld1() {
-        return world1;
-    }
-
-    public static World getWorld2() {
-        return world2;
     }
 }

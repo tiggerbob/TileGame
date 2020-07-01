@@ -28,19 +28,14 @@ public class World {
         this.handler = handler;
         entityManager = new EntityManager(handler, new Player(handler, 100, 100));
         itemManager = new ItemManager(handler);
-        //Temporary entity code! ---------------------------------
 
-        entityManager.addEntity(new Tree(handler, 132, 350));
-        entityManager.addEntity(new Rock(handler, 132, 450));
-        entityManager.addEntity(new Rock(handler, 350, 300));
-        entityManager.addEntity(new Rock(handler, 450, 450));
-        entityManager.addEntity(new Tree(handler, 625, 605));
-        entityManager.addEntity(new Tree(handler, 100, 650));
-        entityManager.addEntity(new Rock(handler, 100, 850));
-        entityManager.addEntity(new Zombie(handler, 200, 350));
-        entityManager.addEntity(new Zombie(handler, 400, 450));
-        entityManager.addEntity(new Zombie(handler, 400, 750));
-        entityManager.addEntity(new Zombie(handler, 700, 850));
+        if (handler.getWorld() == GameState.world1) {
+            world1Entities();
+        } else if (handler.getWorld() == GameState.world2) {
+            world2Entities();
+        } else if (handler.getWorld() == GameState.world3) {
+            world3Entities();
+        }
 
         loadWorld(path);
 
@@ -95,6 +90,41 @@ public class World {
                 tiles[x][y] = Utils.parseInt(tokens[(x + y * width) + 4]);
             }
         }
+    }
+
+    private void world1Entities() {
+        entityManager.addEntity(new Tree(handler, 132, 350));
+        entityManager.addEntity(new Rock(handler, 132, 450));
+        entityManager.addEntity(new Rock(handler, 350, 300));
+        entityManager.addEntity(new Rock(handler, 450, 450));
+        entityManager.addEntity(new Tree(handler, 625, 605));
+        entityManager.addEntity(new Tree(handler, 100, 650));
+        entityManager.addEntity(new Rock(handler, 100, 850));
+        entityManager.addEntity(new Zombie(handler, 200, 350));
+        entityManager.addEntity(new Zombie(handler, 400, 450));
+        entityManager.addEntity(new Zombie(handler, 400, 750));
+        entityManager.addEntity(new Zombie(handler, 700, 850));
+    }
+
+    private void world2Entities() {
+        entityManager.addEntity(new Rock(handler, 350, 300));
+        entityManager.addEntity(new Tree(handler, 500, 900));
+        entityManager.addEntity(new Zombie(handler, 200, 350));
+        entityManager.addEntity(new Zombie(handler, 400, 450));
+        entityManager.addEntity(new Zombie(handler, 400, 750));
+        entityManager.addEntity(new Zombie(handler, 700, 850));
+        entityManager.addEntity(new Zombie(handler, 900, 1000));
+    }
+
+    private void world3Entities() {
+        entityManager.addEntity(new Tree(handler, 132, 350));
+        entityManager.addEntity(new Rock(handler, 132, 450));
+        entityManager.addEntity(new Rock(handler, 350, 300));
+        entityManager.addEntity(new Zombie(handler, 200, 350));
+        entityManager.addEntity(new Zombie(handler, 400, 450));
+        entityManager.addEntity(new Zombie(handler, 400, 750));
+        entityManager.addEntity(new Zombie(handler, 700, 850));
+        entityManager.addEntity(new Zombie(handler, 900, 1000));
     }
 
     public int getWidth() {
